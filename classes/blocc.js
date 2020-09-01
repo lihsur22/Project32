@@ -1,19 +1,48 @@
 class Blocc{
-    constructor(x,y,width,height){
+    constructor(x,y,c){
         var options = {
-            isStatic:true
+            restitution:0.5,
+            friction:1,
+            density:1
         }
         
-        this.body = Bodies.rectangle(x,y,width,height,options);
-        this.height = height;
-        this.width = width;
+        this.x = x;
+        this.y = y;
+        this.c = c;
+        this.body = Bodies.rectangle(this.x,this.y,30,40,options);
         World.add(world,this.body);
     }
+
+
+
     display(){
         var pos = this.body.position;
+        var col = this.c
+
+        push();
+        translate(pos.x,pos.y);
+        rotate(this.body.angle);
+
+        switch(col){
+            case 1:
+                fill("#86CDE9");
+                break;
+            case 2:
+                fill("#FEBFCA");
+                break;
+            case 3:
+                fill("#3EDFCF");
+                break;
+            case 4:
+                fill("#7F7F7F");
+                break;
+            default:
+                break;
+        }
+
+        strokeWeight(2);
         rectMode(CENTER);
-        fill(255);
-        strokeWeight(3);
-        rect(pos.x,pos.y,this.width, this.height);
+        rect(0, 0, 30, 40);
+        pop();
     }
 };
