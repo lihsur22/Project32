@@ -17,12 +17,19 @@ var b22, b23, b24;
 var b25;
 
 var suspend;
+var score, bgcolor;
+
+function preload() {
+  getTime();
+}
 
 function setup() {
   createCanvas(1200,500);
 
   engine = Engine.create();
   world = engine.world;
+  score = 0;
+  bgcolor = "#372B2B";
 
   stone = new Stone(150,250);
 
@@ -77,7 +84,8 @@ function setup() {
 }
 
 function draw() {
-  background("#372B2B");
+  if(bgcolor)
+  background(bgcolor);
 
   Engine.update(engine);
 
@@ -111,6 +119,36 @@ function draw() {
   b23.display();
   b24.display();
   b25.display();
+
+  b1.score();
+  b2.score();
+  b3.score();
+  b4.score();
+  b5.score();
+  b6.score();
+  b7.score();
+  b8.score();
+  b9.score();
+  b10.score();
+  b11.score();
+  b12.score();
+  b13.score();
+  b14.score();
+  b15.score();
+  b16.score();
+  b17.score();
+  b18.score();
+  b19.score();
+  b20.score();
+  b21.score();
+  b22.score();
+  b23.score();
+  b24.score();
+  b25.score();
+
+  fill("white");
+  textSize(20);
+  text("Score " + score, 50, 50);
 }
 
 function mouseDragged() {
@@ -126,4 +164,18 @@ function keyPressed() {
 		Matter.Body.setPosition(stone.body, {x:150,y:250})
 		suspend.reset(stone.body);
 	}
+}
+
+async function getTime() {
+  var response = await fetch ("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
+  var responsejson = await response.json();
+  console.log(responsejson);
+  var time = responsejson.datetime;
+  var hour = time.slice(11,13);
+  if(hour >= 06 && hour <= 18) {
+      var bg = "#372B2B";
+  } else {
+      bg = "#0F0F0F";
+  }
+  bgcolor = bg;
 }

@@ -18,7 +18,7 @@ class Blocc{
 
     display(){
         var pos = this.body.position;
-        var col = this.c
+        var col = this.c;
         
         if(this.body.speed < 3) 
         {
@@ -50,8 +50,15 @@ class Blocc{
         } else 
         {
             World.remove(world, this.body);
+            this.visiblity = this.visiblity - 5;
             push();
             pop();
+        }
+    }
+    score() {
+        if(this.visiblity < 250 && this.visiblity > 240)
+        {
+            score = score + 10;
         }
     }
 };
